@@ -96,9 +96,9 @@ export default function Navbar() {
             <Button
               asChild
               size="lg"
-              className="w-full block justify-center text-white bg-black hover:bg-gray-800"
+              className="w-full flex justify-center items-center text-white bg-black hover:bg-gray-800"
             >
-              <Link href="/login" className="w-full text-center block">
+              <Link href="/login" className="w-full text-center">
                 Login
               </Link>
             </Button>
