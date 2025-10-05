@@ -23,7 +23,7 @@ export default function CompanyLogoMarquee() {
       <img
         src={logo}
         alt={name}
-        className="h-16 w-16 object-contain rounded-full"
+        className="h-12 w-12 object-contain rounded-full"
       />
       <span className="text-lg font-medium text-gray-700 font-lexend">
         {name}

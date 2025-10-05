@@ -3,6 +3,7 @@ import { Playfair_Display, Lexend } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "./_components/Navbar";
+import Footer from "./_components/Footer";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className={`${lexend.variable} ${playfair.variable} antialiased`}>
         <Navbar />
         <main className="mx-auto max-w-7xl px-6">{children}</main>
+        <Footer />
       </body>
     </html>
   );

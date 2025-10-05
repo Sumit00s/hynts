@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +24,12 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const links = [
+    { name: "Jobs", href: "/jobs" },
+    { name: "Experiences", href: "/experiences" },
+    { name: "Blogs", href: "/blogs" },
+  ];
 
   return (
     <>
@@ -41,15 +49,19 @@ export default function Navbar() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex gap-8 font-lexend font-medium text-gray-700">
-            <Link href="/jobs" className="hover:text-black transition">
-              Jobs
-            </Link>
-            <Link href="/experiences" className="hover:text-black transition">
-              Experiences
-            </Link>
-            <Link href="/blogs" className="hover:text-black transition">
-              Blogs
-            </Link>
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`transition ${
+                  pathname === link.href
+                    ? "text-black font-semibold"
+                    : "hover:text-black"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
 
           {/* Desktop Button */}
@@ -74,27 +86,18 @@ export default function Navbar() {
 
         {isOpen && (
           <div className="md:hidden flex flex-col items-start gap-4 py-4 px-6 font-lexend text-gray-700 border-t bg-white/70 backdrop-blur-md w-full">
-            <Link
-              href="/jobs"
-              onClick={() => setIsOpen(false)}
-              className="hover:text-black transition border-b w-full py-2"
-            >
-              Jobs
-            </Link>
-            <Link
-              href="/experiences"
-              onClick={() => setIsOpen(false)}
-              className="hover:text-black transition border-b w-full py-2"
-            >
-              Experiences
-            </Link>
-            <Link
-              href="/blogs"
-              onClick={() => setIsOpen(false)}
-              className="hover:text-black transition border-b w-full py-2"
-            >
-              Blogs
-            </Link>
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`hover:text-black transition border-b w-full py-2 ${
+                  pathname === link.href ? "text-black font-semibold" : ""
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
 
             {/* LOGIN BUTTON */}
             <div className="w-full">
