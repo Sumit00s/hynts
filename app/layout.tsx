@@ -32,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${lexend.variable} ${playfair.variable} antialiased`}>
         <Navbar />
-        {children}
+        <main className="mx-auto max-w-7xl px-6">{children}</main>
       </body>
     </html>
   );

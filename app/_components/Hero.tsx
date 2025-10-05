@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { CompanyLogosOrbit } from "@/components/CompanyLogosOrbit";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export default function Hero() {
   return (
-    <section className="relative pt-28 pb-16 md:pb-24 bg-white text-black">
+    <section className="relative pt-28 pb-10 md:pb-24 bg-white text-black">
       <div className="container mx-auto px-4 text-center">
         <span className="px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-sm font-medium inline-block mb-6">
-          🚀 Join 10,000+ tech professionals{" "}
+          🚀 Join 1 Million+ tech professionals{" "}
         </span>
 
         {/* Main Heading */}
@@ -45,6 +46,7 @@ export default function Hero() {
         </div>
 
         <CompanyLogosOrbit />
+        <SmoothCursor />
       </div>
     </section>
   );
