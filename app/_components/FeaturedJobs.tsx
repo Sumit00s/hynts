@@ -6,7 +6,7 @@ export default function FeaturedJobs() {
   const FEATURED_JOBS = [
     {
       id: 1,
-      title: "Frontend Developer",
+      role: "Frontend Developer",
       company: "Microsoft",
       location: "Remote",
       type: "Fresher",
@@ -14,7 +14,7 @@ export default function FeaturedJobs() {
     },
     {
       id: 2,
-      title: "Backend Developer",
+      role: "Backend Developer",
       company: "Rapido",
       location: "New York, NY",
       type: "Internship",
@@ -22,7 +22,7 @@ export default function FeaturedJobs() {
     },
     {
       id: 3,
-      title: "Full Stack Developer",
+      role: "Full Stack Developer",
       company: "Groww",
       location: "San Francisco, CA",
       type: "Fresher",
@@ -30,7 +30,7 @@ export default function FeaturedJobs() {
     },
     {
       id: 4,
-      title: "Data Analyst",
+      role: "Data Analyst",
       company: "Qualcomm",
       location: "Remote",
       type: "Internship",
@@ -38,7 +38,7 @@ export default function FeaturedJobs() {
     },
     {
       id: 5,
-      title: "UI/UX Designer",
+      role: "UI/UX Designer",
       company: "Uber",
       location: "Austin, TX",
       type: "Fresher",
@@ -46,7 +46,7 @@ export default function FeaturedJobs() {
     },
     {
       id: 6,
-      title: "Mobile App Developer",
+      role: "Mobile App Developer",
       company: "Stripe",
       location: "Seattle, WA",
       type: "Internship",
@@ -90,7 +90,7 @@ export default function FeaturedJobs() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 font-lexend">
-                  {job.title}
+                  {job.role}
                 </h3>
                 <p className="text-gray-500 font-lexend">{job.company}</p>
               </div>
