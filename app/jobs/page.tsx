@@ -13,7 +13,7 @@ export default function JobsPage() {
       type: "Internship",
       experience: "0-1 years",
       batch: "2026",
-      skills: ["React", "Next.js", "TypeScript"],
+      skills: "React, Next.js,TypeScript",
       salary: "$10,000/month",
       date: "Oct 5, 2025",
       carriers_link: "https://careers.google.com",
@@ -27,7 +27,7 @@ export default function JobsPage() {
       type: "Full-time",
       experience: "1-2 years",
       batch: "2025",
-      skills: ["C++", "DSA", "Azure"],
+      skills: "React, Next.js,TypeScript",
       salary: "$12,000/month",
       date: "Oct 4, 2025",
       carriers_link: "https://careers.microsoft.com",
@@ -41,7 +41,7 @@ export default function JobsPage() {
       type: "Remote",
       experience: "0-1 years",
       batch: "2026",
-      skills: ["Node.js", "Express", "MongoDB"],
+      skills: "React, Next.js,TypeScript",
       salary: "$11,000/month",
       date: "Oct 2, 2025",
       carriers_link: "https://www.metacareers.com",
@@ -55,7 +55,7 @@ export default function JobsPage() {
       type: "Internship",
       experience: "0 years",
       batch: "2026",
-      skills: ["Java", "Spring Boot", "AWS"],
+      skills: "React, Next.js,TypeScript",
       salary: "$9,500/month",
       date: "Oct 1, 2025",
       carriers_link: "https://www.amazon.jobs",
@@ -69,7 +69,7 @@ export default function JobsPage() {
       type: "Full-time",
       experience: "1-3 years",
       batch: "2024-2025",
-      skills: ["React", "Node.js", "SQL"],
+      skills: "React, Next.js,TypeScript",
       salary: "$13,000/month",
       date: "Sept 30, 2025",
       carriers_link: "https://www.tesla.com/careers",
@@ -83,7 +83,7 @@ export default function JobsPage() {
       type: "Remote",
       experience: "1-2 years",
       batch: "2025",
-      skills: ["Python", "TensorFlow", "CUDA"],
+      skills: "React, Next.js,TypeScript",
       salary: "$14,000/month",
       date: "Sept 28, 2025",
       carriers_link: "https://nvidia.com/careers",
@@ -97,7 +97,7 @@ export default function JobsPage() {
       type: "Full-time",
       experience: "0-2 years",
       batch: "2025-2026",
-      skills: ["Figma", "Design Systems", "Illustrator"],
+      skills: "React, Next.js,TypeScript",
       salary: "$10,000/month",
       date: "Sept 27, 2025",
       carriers_link: "https://adobe.com/careers",
@@ -111,7 +111,7 @@ export default function JobsPage() {
       type: "Remote",
       experience: "0-1 years",
       batch: "2026",
-      skills: ["SQL", "Python", "Tableau"],
+      skills: "React, Next.js,TypeScript",
       salary: "$10,500/month",
       date: "Sept 25, 2025",
       carriers_link: "https://www.spotifyjobs.com",
@@ -125,7 +125,7 @@ export default function JobsPage() {
       type: "Full-time",
       experience: "1-3 years",
       batch: "2025",
-      skills: ["Swift", "Xcode", "iOS SDK"],
+      skills: "React, Next.js,TypeScript",
       salary: "$13,500/month",
       date: "Sept 22, 2025",
       carriers_link: "https://apple.com/careers",
@@ -139,7 +139,7 @@ export default function JobsPage() {
       type: "Full-time",
       experience: "0-2 years",
       batch: "2025-2026",
-      skills: ["C", "Embedded Systems", "Verilog"],
+      skills: "React, Next.js,TypeScript",
       salary: "$9,000/month",
       date: "Sept 20, 2025",
       carriers_link: "https://intel.com/careers",
@@ -153,7 +153,7 @@ export default function JobsPage() {
       type: "Full-time",
       experience: "0 years",
       batch: "2026",
-      skills: ["JavaScript", "MySQL", "React"],
+      skills: "React, Next.js,TypeScript",
       salary: "$8,500/month",
       date: "Sept 18, 2025",
       carriers_link: "https://zoho.com/careers",
@@ -167,7 +167,7 @@ export default function JobsPage() {
       type: "Internship",
       experience: "0-1 years",
       batch: "2026",
-      skills: ["Python", "PyTorch", "LLMs"],
+      skills: "React, Next.js,TypeScript",
       salary: "$15,000/month",
       date: "Sept 15, 2025",
       carriers_link: "https://openai.com/careers",
@@ -241,12 +241,12 @@ export default function JobsPage() {
 
               {/* Skills */}
               <div className="flex flex-wrap gap-2 mt-2">
-                {job.skills.map((skill) => (
+                {job.skills.split(",").map((skill) => (
                   <span
                     key={skill}
                     className="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full border border-blue-100"
                   >
-                    {skill}
+                    {skill.trim()}
                   </span>
                 ))}
               </div>
@@ -277,9 +277,9 @@ export default function JobsPage() {
           ))}
         </div>
 
-        {/* Community  Section */}
+        {/* Community Section */}
         <aside className="lg:w-[30%] w-full">
-          <div className="border border-gray-200 rounded-lg p-5 bg-white shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col gap-4 text-center">
+          <div className="sticky top-24 border border-gray-200 rounded-lg p-5 bg-white shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col gap-4 text-center">
             {/* Logo */}
             <div className="flex justify-center">
               <div className="w-14 h-14 rounded-lg overflow-hidden bg-green-50 flex items-center justify-center">
@@ -302,13 +302,6 @@ export default function JobsPage() {
                 Get daily job alerts, connect with developers, and grow with our
                 tech network.
               </p>
-            </div>
-
-            {/* Features */}
-            <div className="flex flex-col gap-1 text-sm text-gray-700 text-left px-2">
-              <p>✅ Job Updates & Internships</p>
-              <p>💡 Developer Networking</p>
-              <p>🚀 Growth Opportunities</p>
             </div>
 
             {/* Join Button */}
