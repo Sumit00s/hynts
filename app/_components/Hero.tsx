@@ -15,7 +15,8 @@ export default function Hero() {
 
         {/* Main Heading */}
         <h1 className="text-4xl font-playfair md:text-5xl lg:text-6xl font-bold mb-6 max-w-4xl mx-auto ">
-          Find Your <AuroraText>First Job</AuroraText>, Faster and Smarter.
+          Find Off-Campus <AuroraText>Tech Jobs</AuroraText> & Ace Your
+          Interviews.
         </h1>
 
         {/* Subheading */}
@@ -39,14 +40,14 @@ export default function Hero() {
             asChild
             className="border-black text-black hover:bg-gray-100"
           >
-            <Link href="/experiences" className="flex items-center">
+            <Link href="/interview" className="flex items-center">
               Explore Experiences <ChevronRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
 
         <CompanyLogosOrbit />
-        <SmoothCursor />
+        {/* <SmoothCursor /> */}
       </div>
     </section>
   );

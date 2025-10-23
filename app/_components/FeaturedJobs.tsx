@@ -1,58 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MoveRight } from "lucide-react";
+import { getFeaturedJobs } from "@/app/actions/jobs/getFeaturedJobs";
 
-export default function FeaturedJobs() {
-  const FEATURED_JOBS = [
-    {
-      id: 1,
-      role: "Frontend Developer",
-      company: "Microsoft",
-      location: "Remote",
-      type: "Fresher",
-      imageUrl: "/companylogos/microsoft_128.jpg",
-    },
-    {
-      id: 2,
-      role: "Backend Developer",
-      company: "Rapido",
-      location: "New York, NY",
-      type: "Internship",
-      imageUrl: "/companylogos/rapido_128.jpg",
-    },
-    {
-      id: 3,
-      role: "Full Stack Developer",
-      company: "Groww",
-      location: "San Francisco, CA",
-      type: "Fresher",
-      imageUrl: "/companylogos/groww_128.jpg",
-    },
-    {
-      id: 4,
-      role: "Data Analyst",
-      company: "Qualcomm",
-      location: "Remote",
-      type: "Internship",
-      imageUrl: "/companylogos/qualcomm_128.jpg",
-    },
-    {
-      id: 5,
-      role: "UI/UX Designer",
-      company: "Uber",
-      location: "Austin, TX",
-      type: "Fresher",
-      imageUrl: "/companylogos/uber_128.jpg",
-    },
-    {
-      id: 6,
-      role: "Mobile App Developer",
-      company: "Stripe",
-      location: "Seattle, WA",
-      type: "Internship",
-      imageUrl: "/companylogos/stripe_128.jpg",
-    },
-  ];
+export const revalidate = 300; // ISR: revalidate every 5 mins
+
+export default async function FeaturedJobs() {
+  const FEATURED_JOBS = await getFeaturedJobs();
 
   return (
     <section className="py-16 px-6 max-w-7xl mx-auto">
@@ -71,42 +25,46 @@ export default function FeaturedJobs() {
 
       {/* Jobs Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {FEATURED_JOBS.map((job) => (
-          <Link
-            key={job.id}
-            href={`/jobs/${job.id}`}
-            className="border border-gray-200 rounded-md p-5 hover:shadow-lg transition-all duration-200 flex flex-col gap-4 bg-white"
-          >
-            {/* Top Section */}
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
-                <Image
-                  src={job.imageUrl}
-                  width={56}
-                  height={56}
-                  alt={job.company}
-                  className="object-contain"
-                />
+        {FEATURED_JOBS.length > 0 ? (
+          FEATURED_JOBS.map((job) => (
+            <Link
+              key={job.id}
+              href={`/jobs/${job.id}`}
+              className="border border-gray-200 rounded-md p-5 hover:shadow-lg transition-all duration-200 flex flex-col gap-4 bg-white"
+            >
+              {/* Top Section */}
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
+                  <Image
+                    src={job.logo_url}
+                    width={56}
+                    height={56}
+                    alt={job.company}
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800 font-lexend">
+                    {job.role}
+                  </h3>
+                  <p className="text-gray-500 font-lexend">{job.company}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 font-lexend">
-                  {job.role}
-                </h3>
-                <p className="text-gray-500 font-lexend">{job.company}</p>
-              </div>
-            </div>
 
-            {/* Bottom Section */}
-            <div className="flex items-center gap-3 mt-auto">
-              <span className="px-3 py-1 text-xs font-medium bg-blue-50 text-blue-600 rounded-full font-lexend">
-                {job.type}
-              </span>
-              <span className="px-3 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full font-lexend">
-                {job.location}
-              </span>
-            </div>
-          </Link>
-        ))}
+              {/* Bottom Section */}
+              <div className="flex items-center gap-3 mt-auto">
+                <span className="px-3 py-1 text-xs font-medium bg-blue-50 text-blue-600 rounded-full font-lexend">
+                  {job.type}
+                </span>
+                <span className="px-3 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full font-lexend">
+                  {job.location}
+                </span>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <p className="text-gray-500">No featured jobs available right now.</p>
+        )}
       </div>
     </section>
   );

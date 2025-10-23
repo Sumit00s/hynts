@@ -27,8 +27,8 @@ export default function Navbar() {
 
   const links = [
     { name: "Jobs", href: "/jobs" },
-    { name: "Experiences", href: "/experiences" },
-    { name: "Blogs", href: "/blogs" },
+    { name: "Interview", href: "/interview" },
+    { name: "Resume", href: "/resume" },
   ];
 
   return (
