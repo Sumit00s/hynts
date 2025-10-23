@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import {
   MapPin,
@@ -13,13 +14,40 @@ import {
 import { notFound } from "next/navigation";
 import { getJobById } from "@/app/actions/jobs/getJobById";
 import WhatsappCard from "@/app/_components/WhatsappCard";
-import { getRelativeTime } from "@/app/_lib/utils"; // Add this import
+import { getRelativeTime } from "@/app/_lib/utils";
 
 type JobDetailPageProps = {
   params: {
     id: string;
   };
 };
+
+// ✅ Generate SEO metadata for job pages
+export async function generateMetadata({
+  params,
+}: JobDetailPageProps): Promise<Metadata> {
+  const job = await getJobById(params.id);
+
+  if (!job) {
+    return {
+      title: "Job Not Found",
+    };
+  }
+
+  return {
+    title: `${job.role} at ${job.company} - ${job.location}`,
+    description: `${job.role} position at ${job.company} in ${job.location}. ${
+      job.type
+    } | ${job.experience} | Salary: ${job.salary}. ${
+      job.skills ? `Skills: ${job.skills}` : ""
+    }`,
+    openGraph: {
+      title: `${job.role} at ${job.company}`,
+      description: `${job.type} position in ${job.location}. Experience: ${job.experience} | Salary: ${job.salary}`,
+      images: [job.logo_url],
+    },
+  };
+}
 
 export default async function JobDetailPage({ params }: JobDetailPageProps) {
   const { id } = params;
@@ -90,7 +118,7 @@ export default async function JobDetailPage({ params }: JobDetailPageProps) {
             </div>
             <div className="flex items-center gap-2">
               <CalendarDays size={18} className="text-blue-600 flex-shrink-0" />
-              <span>{getRelativeTime(job.date)}</span> {/* Changed this line */}
+              <span>{getRelativeTime(job.date)}</span>
             </div>
           </div>
 
