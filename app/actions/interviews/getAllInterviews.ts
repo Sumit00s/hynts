@@ -100,8 +100,8 @@ export async function getAllInterviews(
 // Add manual cache busting for testing
 export async function clearInterviewsCache() {
   try {
-    const { revalidateTag } = await import("next/cache");
-    revalidateTag("interviews");
+    const { revalidatePath } = await import("next/cache");
+    revalidatePath("/interview"); // Only revalidate /interviews page
     console.log("✅ Cache cleared");
     return { success: true };
   } catch (err) {

@@ -17,16 +17,17 @@ import WhatsappCard from "@/app/_components/WhatsappCard";
 import { getRelativeTime } from "@/app/_lib/utils";
 
 type JobDetailPageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 // ✅ Generate SEO metadata for job pages
 export async function generateMetadata({
   params,
 }: JobDetailPageProps): Promise<Metadata> {
-  const job = await getJobById(params.id);
+  const { id } = await params; // ✅ Await params here
+  const job = await getJobById(id);
 
   if (!job) {
     return {
@@ -50,7 +51,7 @@ export async function generateMetadata({
 }
 
 export default async function JobDetailPage({ params }: JobDetailPageProps) {
-  const { id } = params;
+  const { id } = await params; // ✅ Await params here
 
   const job = await getJobById(id);
 

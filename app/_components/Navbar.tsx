@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, MessageCircleMore, X } from "lucide-react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { usePathname } from "next/navigation";
 
@@ -71,7 +71,10 @@ export default function Navbar() {
               size="lg"
               className="text-white bg-black hover:bg-gray-800"
             >
-              <Link href="/login">Login</Link>
+              <a href="/" className=" bg-green-600 text-white ">
+                <MessageCircleMore />
+                Join WhatsApp
+              </a>
             </Button>
           </div>
 
@@ -106,9 +109,10 @@ export default function Navbar() {
                 size="lg"
                 className="w-full flex justify-center items-center text-white bg-black hover:bg-gray-800"
               >
-                <Link href="/login" className="w-full text-center">
-                  Login
-                </Link>
+                <a href="/" className=" bg-green-600 text-white ">
+                  <MessageCircleMore />
+                  Join WhatsApp
+                </a>
               </Button>
             </div>
           </div>

@@ -1,114 +1,71 @@
-"use client";
-
+// File: app/_components/FeaturedExperiences.tsx
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
 import { Marquee } from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
+import { getFeaturedInterviews } from "@/app/actions/interviews/getFeaturedInterviews";
 
-export default function FeaturedExperiences() {
-  const FEATURED_EXPERIENCES = [
-    {
-      id: 1,
-      name: "Jack",
-      role: "Software Engineer",
-      company: "Google",
-      img: "https://avatar.vercel.sh/jack",
-      salary: "$120,000",
-    },
-    {
-      id: 2,
-      name: "Ava",
-      role: "Frontend Developer Intern",
-      company: "Meta",
-      img: "https://avatar.vercel.sh/ava",
-      salary: "$2,500 / mo",
-    },
-    {
-      id: 3,
-      name: "Liam",
-      role: "Data Analyst",
-      company: "Amazon",
-      img: "https://avatar.vercel.sh/liam",
-      salary: "$95,000",
-    },
-    {
-      id: 4,
-      name: "Sophia",
-      role: "UI/UX Designer",
-      company: "Figma",
-      img: "https://avatar.vercel.sh/sophia",
-      salary: "$88,000",
-    },
-    {
-      id: 5,
-      name: "Ethan",
-      role: "Machine Learning Engineer",
-      company: "OpenAI",
-      img: "https://avatar.vercel.sh/ethan",
-      salary: "$150,000",
-    },
-    {
-      id: 6,
-      name: "Olivia",
-      role: "Product Manager",
-      company: "Stripe",
-      img: "https://avatar.vercel.sh/olivia",
-      salary: "$130,000",
-    },
-    {
-      id: 7,
-      name: "Noah",
-      role: "Backend Developer",
-      company: "Netflix",
-      img: "https://avatar.vercel.sh/noah",
-      salary: "$110,000",
-    },
-    {
-      id: 8,
-      name: "Emma",
-      role: "Cloud Engineer Intern",
-      company: "Microsoft",
-      img: "https://avatar.vercel.sh/emma",
-      salary: "$3,000 / mo",
-    },
-    {
-      id: 9,
-      name: "Lucas",
-      role: "DevOps Engineer",
-      company: "Spotify",
-      img: "https://avatar.vercel.sh/lucas",
-      salary: "$105,000",
-    },
-    {
-      id: 10,
-      name: "Mia",
-      role: "AI Research Intern",
-      company: "DeepMind",
-      img: "https://avatar.vercel.sh/mia",
-      salary: "$4,000 / mo",
-    },
-    {
-      id: 11,
-      name: "James",
-      role: "Mobile App Developer",
-      company: "Uber",
-      img: "https://avatar.vercel.sh/james",
-      salary: "$100,000",
-    },
-    {
-      id: 12,
-      name: "Isabella",
-      role: "Security Engineer",
-      company: "Tesla",
-      img: "https://avatar.vercel.sh/isabella",
-      salary: "$140,000",
-    },
-  ];
+// Array of avatar URLs for random assignment
+const AVATAR_NAMES = [
+  "jack",
+  "ava",
+  "liam",
+  "sophia",
+  "ethan",
+  "olivia",
+  "noah",
+  "emma",
+  "lucas",
+  "mia",
+  "james",
+  "isabella",
+  "oliver",
+  "charlotte",
+  "william",
+  "amelia",
+  "henry",
+  "harper",
+];
 
-  const firstRow = FEATURED_EXPERIENCES.slice(0, 6);
-  const secondRow = FEATURED_EXPERIENCES.slice(6, 12);
+// Function to get a consistent random avatar for a user
+function getAvatarUrl(name: string | null, id: number): string {
+  const safeName = name || "anonymous";
+  const index = (id + safeName.length) % AVATAR_NAMES.length;
+  return `https://avatar.vercel.sh/${AVATAR_NAMES[index]}`;
+}
 
-  const ExperienceCard = ({ img, name, role, company, salary }: any) => (
+export default async function FeaturedExperiences() {
+  const interviews = await getFeaturedInterviews();
+
+  // If no interviews found, show a message or return null
+  if (!interviews || interviews.length === 0) {
+    return null;
+  }
+
+  // Transform interviews data to match the card format
+  const experiences = interviews.map((interview) => ({
+    id: interview.id,
+    name: interview.is_anonymous
+      ? "Anonymous"
+      : interview.full_name || "Anonymous",
+    role: interview.job_position_applied || "Not specified",
+    company: interview.company_name || "Unknown Company",
+    img: getAvatarUrl(interview.full_name, interview.id),
+    salary: interview.salary_range || "Not disclosed",
+    result: interview.interview_result,
+  }));
+
+  const firstRow = experiences.slice(0, 6);
+  const secondRow = experiences.slice(6, 12);
+
+  const ExperienceCard = ({
+    img,
+    name,
+    role,
+    company,
+    salary,
+    result,
+  }: any) => (
     <div
       className={cn(
         "relative h-full w-72 cursor-pointer overflow-hidden rounded-2xl border p-5 font-lexend",
@@ -117,13 +74,32 @@ export default function FeaturedExperiences() {
     >
       <div className="flex items-center gap-3 mb-3">
         <img src={img} alt={name} className="w-10 h-10 rounded-full" />
-        <div>
-          <h3 className="font-semibold text-gray-900">{name}</h3>
-          <p className="text-sm text-gray-500">{company}</p>
+        <div className="flex-1">
+          <h3 className="font-semibold text-gray-900 truncate">{name}</h3>
+          <p className="text-sm text-gray-500 truncate">{company}</p>
         </div>
       </div>
-      <p className="text-base font-medium text-gray-700 mb-1">{role}</p>
-      <p className="text-sm text-blue-600 font-semibold">{salary}</p>
+      <p className="text-base font-medium text-gray-700 mb-2 line-clamp-2">
+        {role}
+      </p>
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-blue-600 font-semibold truncate">{salary}</p>
+        {result && (
+          <span
+            className={cn(
+              "text-xs px-2 py-1 rounded-full font-medium",
+              result.toLowerCase().includes("selected") ||
+                result.toLowerCase().includes("offer")
+                ? "bg-green-100 text-green-700"
+                : result.toLowerCase().includes("rejected")
+                ? "bg-red-100 text-red-700"
+                : "bg-gray-100 text-gray-700"
+            )}
+          >
+            {result}
+          </span>
+        )}
+      </div>
     </div>
   );
 
@@ -135,7 +111,7 @@ export default function FeaturedExperiences() {
           Interview Experiences
         </h2>
         <Link
-          href="/experiences"
+          href="/interview"
           className="flex items-center text-blue-600 hover:text-blue-800 font-medium transition"
         >
           Explore More <MoveRight className="ml-2 h-5 w-5" />
@@ -144,29 +120,33 @@ export default function FeaturedExperiences() {
 
       {/* Marquee Rows */}
       <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-        <Marquee pauseOnHover className="[--duration:22s]">
-          {firstRow.map((exp) => (
-            <Link
-              key={exp.id}
-              href={`/experiences/${exp.id}`}
-              className="block"
-            >
-              <ExperienceCard {...exp} />
-            </Link>
-          ))}
-        </Marquee>
+        {firstRow.length > 0 && (
+          <Marquee pauseOnHover className="[--duration:22s]">
+            {firstRow.map((exp) => (
+              <Link
+                key={exp.id}
+                href={`/interview/${exp.id}`}
+                className="block"
+              >
+                <ExperienceCard {...exp} />
+              </Link>
+            ))}
+          </Marquee>
+        )}
 
-        <Marquee reverse pauseOnHover className="[--duration:22s]">
-          {secondRow.map((exp) => (
-            <Link
-              key={exp.id}
-              href={`/experiences/${exp.id}`}
-              className="block"
-            >
-              <ExperienceCard {...exp} />
-            </Link>
-          ))}
-        </Marquee>
+        {secondRow.length > 0 && (
+          <Marquee reverse pauseOnHover className="[--duration:22s]">
+            {secondRow.map((exp) => (
+              <Link
+                key={exp.id}
+                href={`/interview/${exp.id}`}
+                className="block"
+              >
+                <ExperienceCard {...exp} />
+              </Link>
+            ))}
+          </Marquee>
+        )}
 
         {/* Fading Edges */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white"></div>

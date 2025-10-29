@@ -74,9 +74,9 @@ export async function submitInterviewExperience(
       };
     }
 
-    // ✅ Revalidate cache after successful submission
-    revalidateTag("interviews");
-    revalidateTag("company-suggestions");
+    // ✅ Revalidate cache after successful submission (Next.js 15 syntax)
+    revalidateTag("interviews", "default");
+    revalidateTag("company-suggestions", "default");
 
     console.log("✅ Interview submitted successfully:", result);
     return {
