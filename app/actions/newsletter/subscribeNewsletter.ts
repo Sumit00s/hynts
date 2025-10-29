@@ -49,10 +49,8 @@ export async function subscribeNewsletter(
       };
     }
 
-    // ✅ Revalidate cache after successful subscription
-    revalidateTag("newsletter-subscribers");
+    revalidateTag("newsletter-subscribers", "default");
 
-    console.log("✅ Newsletter subscription successful:", result);
     return {
       success: true,
       message: "Successfully subscribed to newsletter!",
