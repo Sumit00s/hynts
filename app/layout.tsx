@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lexend } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 import Navbar from "./_components/Navbar";
@@ -35,6 +36,7 @@ export default function RootLayout({
         <Navbar />
         <main className="mx-auto max-w-7xl px-6">{children}</main>
         <Footer />
+        <GoogleAnalytics gaId="G-X7669VMRSP" />
       </body>
     </html>
   );
