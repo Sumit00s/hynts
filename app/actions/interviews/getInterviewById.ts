@@ -16,7 +16,6 @@ export async function getInterviewById(id: string): Promise<Interview | null> {
       return null;
     }
 
-    console.log(`✅ Successfully fetched interview: ${id}`);
     return data as Interview;
   } catch (error) {
     console.error(`❌ Unexpected error fetching interview ${id}:`, error);

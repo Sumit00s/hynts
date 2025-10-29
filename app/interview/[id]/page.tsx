@@ -313,8 +313,6 @@ export default async function InterviewDetailPage({
 }: InterviewDetailPageProps) {
   const { id } = await params; // ✅ Await params
 
-  console.log("🔍 Page received ID:", id); // Debug log
-
   const interview = await getInterviewById(id);
 
   // Use proper 404 handling
