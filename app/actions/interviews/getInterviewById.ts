@@ -5,8 +5,6 @@ import { Interview } from "@/types/interview";
 
 export async function getInterviewById(id: string): Promise<Interview | null> {
   try {
-    console.log(`🔍 Fetching interview: ${id}`);
-
     const { data, error } = await supabase
       .from("interviews")
       .select("*")

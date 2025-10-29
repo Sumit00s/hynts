@@ -20,8 +20,6 @@ export async function getJobById(id: string) {
   const getCachedJob = unstable_cache(
     async () => {
       try {
-        console.log("🔍 Fetching job with ID:", numericId);
-
         const { data, error } = await supabase
           .from("jobs")
           .select("*")

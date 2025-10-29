@@ -84,10 +84,10 @@ export async function getAllJobs(page: number, pageSize: number) {
   return getCachedJobs();
 }
 
-// ✅ Cache invalidation when new job is posted
+// ✅ Cache invalidation when new job is posted (Next.js 15 compatible)
 export async function revalidateJobsCache() {
   const { revalidateTag } = await import("next/cache");
-  revalidateTag("jobs");
+  revalidateTag("jobs", "default");
 }
 
 // ✅ Prefetch next page for smoother infinite scroll

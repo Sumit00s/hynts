@@ -86,23 +86,11 @@ export default function InterviewPage() {
       setError(null);
 
       try {
-        console.log("🔍 Fetching:", {
-          page,
-          query: debouncedQuery,
-          currentCount: interviews.length,
-        });
-
         const res = await getAllInterviews(
           page,
           pageSize,
           debouncedQuery || undefined
         );
-
-        console.log("✅ Received:", {
-          count: res.interviews.length,
-          total: res.total,
-          hasError: !!res.error,
-        });
 
         // Check if search changed while fetching
         if (currentSearchRef.current !== debouncedQuery) {

@@ -8,7 +8,6 @@ interface JobCardProps {
 }
 
 export default function JobCard({ job }: JobCardProps) {
-  console.log("Rendering JobCard for:", job);
   return (
     <div className="border border-gray-200 rounded-lg p-5 hover:shadow-lg flex flex-col gap-4 bg-white transition transform hover:-translate-y-1">
       {/* Top Section */}
