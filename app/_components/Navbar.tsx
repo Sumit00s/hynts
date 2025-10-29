@@ -71,7 +71,10 @@ export default function Navbar() {
               size="lg"
               className="text-white bg-black hover:bg-gray-800"
             >
-              <a href="/" className=" bg-green-600 text-white ">
+              <a
+                href="https://chat.whatsapp.com/KBIk0COfdZSDenWJN9xWmN?mode=wwt"
+                className=" bg-green-600 text-white "
+              >
                 <MessageCircleMore />
                 Join WhatsApp
               </a>

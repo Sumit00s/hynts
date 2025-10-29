@@ -30,7 +30,7 @@ export default function WhatsappCard() {
         className="bg-green-500 hover:bg-green-600 text-white font-medium"
       >
         <Link
-          href="https://chat.whatsapp.com/your-community-link"
+          href="https://chat.whatsapp.com/KBIk0COfdZSDenWJN9xWmN?mode=wwt"
           target="_blank"
         >
           Join Now
