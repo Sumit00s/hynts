@@ -7,7 +7,6 @@ export const revalidate = 300; // ISR: revalidate every 5 mins
 
 export default async function FeaturedJobs() {
   const FEATURED_JOBS = await getFeaturedJobs();
-
   return (
     <section className="py-16 px-6 max-w-7xl mx-auto">
       {/* Header */}
