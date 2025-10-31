@@ -36,7 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${lexend.variable} ${playfair.variable} antialiased`}>
         <Navbar />
-        <main className="mx-auto max-w-7xl px-6">{children}</main>
+        <main className="mx-auto max-w-7xl px-4">{children}</main>
         <Footer />
         <GoogleAnalytics gaId="G-X7669VMRSP" />
         <Analytics />
