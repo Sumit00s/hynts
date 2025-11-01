@@ -58,7 +58,8 @@ export default function Newsletter() {
           onSubmit={handleSubmit}
           className="flex flex-col w-full max-w-lg gap-3"
         >
-          <div className="flex w-full gap-3">
+          {/* OPTIMIZATION: Use flex-col (vertical) on mobile, then switch to sm:flex-row (horizontal) on larger screens */}
+          <div className="flex flex-col sm:flex-row w-full gap-3">
             <Input
               type="email"
               placeholder="Enter your email"
@@ -66,12 +67,14 @@ export default function Newsletter() {
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
               required
-              className="flex-grow px-4 py-6 outline-none font-lexend"
+              // Ensure full width on mobile (w-full) and allow it to grow on desktop (sm:flex-grow)
+              className="w-full sm:flex-grow px-4 py-6 outline-none font-lexend"
             />
             <Button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-6 cursor-pointer font-lexend"
+              // Ensure full width on mobile (w-full) and revert to automatic width on desktop (sm:w-auto)
+              className="w-full sm:w-auto px-6 py-6 cursor-pointer font-lexend"
             >
               {isLoading ? "Subscribing..." : "Subscribe"}
             </Button>
