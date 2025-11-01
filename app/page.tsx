@@ -5,7 +5,7 @@ import CompanyLogoMarquee from "./_components/CompanyLogoMarquee";
 import FeaturedBlogs from "./_components/FeaturedBlogs";
 import Newsletter from "./_components/NewsLetter";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
       <Hero />

@@ -12,9 +12,16 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { notFound } from "next/navigation";
-import { getJobById } from "@/app/actions/jobs/getJobById";
+import { supabase } from "@/app/_lib/supabaseClient";
 import WhatsappCard from "@/app/_components/WhatsappCard";
 import { getRelativeTime } from "@/app/_lib/utils";
+import { Job } from "@/types/job";
+
+// ✅ 24-hour revalidation - job details don't change frequently
+export const revalidate = 86400; // 24 hours
+
+// ✅ Enable static params for better caching
+export const dynamicParams = true;
 
 type JobDetailPageProps = {
   params: Promise<{
@@ -22,11 +29,38 @@ type JobDetailPageProps = {
   }>;
 };
 
+// ✅ Simple direct fetch - Next.js handles caching automatically
+async function getJobById(id: string): Promise<Job | null> {
+  const numericId = parseInt(id, 10);
+
+  if (isNaN(numericId)) {
+    return null;
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from("jobs")
+      .select("*")
+      .eq("id", numericId)
+      .single();
+
+    if (error) {
+      console.error("❌ Error fetching job:", error.message);
+      return null;
+    }
+
+    return data as Job;
+  } catch (err) {
+    console.error("❌ Unexpected error:", err);
+    return null;
+  }
+}
+
 // ✅ Generate SEO metadata for job pages
 export async function generateMetadata({
   params,
 }: JobDetailPageProps): Promise<Metadata> {
-  const { id } = await params; // ✅ Await params here
+  const { id } = await params;
   const job = await getJobById(id);
 
   if (!job) {
@@ -51,8 +85,7 @@ export async function generateMetadata({
 }
 
 export default async function JobDetailPage({ params }: JobDetailPageProps) {
-  const { id } = await params; // ✅ Await params here
-
+  const { id } = await params;
   const job = await getJobById(id);
 
   if (!job) {
