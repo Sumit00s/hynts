@@ -14,10 +14,23 @@ import { supabase } from "@/app/_lib/supabaseClient";
 import { Interview } from "@/types/interview";
 
 // ✅ 24-hour revalidation - interview experiences don't change frequently
-export const revalidate = 86400; // 24 hours
+export const revalidate = 43200; // 12 hours
 
-// ✅ Enable static params for better caching
-export const dynamicParams = true;
+export async function generateStaticParams() {
+  try {
+    const { data, error } = await supabase.from("interviews").select("id");
+
+    if (error) {
+      console.error("Error fetching job ids for generateStaticParams:", error.message);
+      return [];
+    }
+
+    return (data || []).map((row: any) => ({ id: String(row.id) }));
+  } catch (err) {
+    console.error("Unexpected error in generateStaticParams:", err);
+    return [];
+  }
+}
 
 type InterviewDetailPageProps = {
   params: Promise<{ id: string }>;

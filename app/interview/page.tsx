@@ -7,7 +7,7 @@ import InterviewClientWrapper from "@/app/_components/InterviewClientWrapper";
 
 // ✅ Force static rendering - NO edge requests for initial load
 export const dynamic = "force-static";
-export const revalidate = 36000; // 10 hours
+export const revalidate = 43200; // 12 hours
 
 const INTERVIEW_FIELDS = `
   id,
