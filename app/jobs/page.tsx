@@ -7,7 +7,7 @@ import InfiniteJobList from "@/app/_components/InfiniteJobList";
 
 // ✅ Force static rendering - NO edge requests for initial load
 export const dynamic = "force-static";
-export const revalidate = 36000; // 10 hours
+export const revalidate = 43200; // 12 hours
 
 const JOB_FIELDS = `
   id,

@@ -18,10 +18,24 @@ import { getRelativeTime } from "@/app/_lib/utils";
 import { Job } from "@/types/job";
 
 // ✅ 24-hour revalidation - job details don't change frequently
-export const revalidate = 86400; // 24 hours
+export const revalidate = 43200; // 12 hours
 
-// ✅ Enable static params for better caching
-export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  try {
+    const { data, error } = await supabase.from("jobs").select("id");
+
+    if (error) {
+      console.error("Error fetching job ids for generateStaticParams:", error.message);
+      return [];
+    }
+
+    return (data || []).map((row: any) => ({ id: String(row.id) }));
+  } catch (err) {
+    console.error("Unexpected error in generateStaticParams:", err);
+    return [];
+  }
+}
 
 type JobDetailPageProps = {
   params: Promise<{
