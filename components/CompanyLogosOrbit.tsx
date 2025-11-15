@@ -1,4 +1,12 @@
+import Image from "next/image";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
+
+// Import images from assets (Next.js static imports)
+import openaiImg from "@/assets/heroOrbit/open-ai.png";
+import googleImg from "@/assets/heroOrbit/google.png";
+import microsoftImg from "@/assets/heroOrbit/microsoft.png";
+import metaImg from "@/assets/heroOrbit/meta.jpeg";
+import netflixImg from "@/assets/heroOrbit/netflix.png";
 
 export function CompanyLogosOrbit() {
   return (
@@ -24,22 +32,22 @@ export function CompanyLogosOrbit() {
 
 const Icons = {
   openai: () => (
-    <img src="/open-ai.png" alt="OpenAI" className="w-10 h-10 rounded-full" />
+    <Image src={openaiImg} alt="OpenAI" className="w-10 h-10 rounded-full" />
   ),
   google: () => (
-    <img src="/google.png" alt="Google" className="w-10 h-10 rounded-full" />
+    <Image src={googleImg} alt="Google" className="w-10 h-10 rounded-full" />
   ),
   microsoft: () => (
-    <img
-      src="/microsoft.png"
+    <Image
+      src={microsoftImg}
       alt="Microsoft"
       className="w-10 h-10 rounded-full"
     />
   ),
   meta: () => (
-    <img src="/meta.jpeg" alt="LinkedIn" className="w-10 h-10 rounded-full" />
+    <Image src={metaImg} alt="Meta" className="w-10 h-10 rounded-full" />
   ),
   netflix: () => (
-    <img src="/netflix.png" alt="Netflix" className="w-10 h-10 rounded-full" />
+    <Image src={netflixImg} alt="Netflix" className="w-10 h-10 rounded-full" />
   ),
 };
